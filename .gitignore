@@ -1,5 +1,6 @@
 .env
 bin
+etc
 lib
 lib64
 include
