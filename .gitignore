@@ -8,3 +8,4 @@ share
 pyvenv.cfg
 __pycache__
 tests
+.pytest_cache

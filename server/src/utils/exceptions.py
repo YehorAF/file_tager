@@ -23,3 +23,11 @@ class CannotDeleteFileInfoError(HTTPException):
 
 class NotSuchFileError(HTTPException):
     pass
+
+
+class DirectoryIsNotEmpty(HTTPException):
+    pass
+
+
+class FileTypeError(HTTPException):
+    pass
