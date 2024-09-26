@@ -63,7 +63,7 @@ async def add_file(
             detail=str(ex_)
         )
 
-    return FileInfoModel(id=str(file_res.inserted_id))
+    return FileInfoModel(id=file_res.inserted_id)
 
 
 @files_router.get("/files", response_model=FilesInfoModel)
@@ -118,9 +118,9 @@ async def send_file(file_id: str):
 async def update_file(file_id: str, data: UpdateFileInfoModel):
     check_tags(data.tags)
     file_id = objectid_validation(file_id)
-    res = await crud.update_file(file_id, data.model_dump())
+    file_res = await crud.update_file(file_id, data.model_dump())
 
-    if res.modified_count < 1:
+    if file_res.matched_count < 1:
         raise CannotUpdateFileInfoError(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"cannot update fle by id: {file_id}"

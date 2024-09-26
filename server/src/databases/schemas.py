@@ -19,12 +19,15 @@ class UpdateFileInfoModel(BaseModel):
     tags: Optional[list[str]]
 
 
-class FileInfoModel(FileModel):
+class FileInfoModel(BaseModel):
     id: Annotated[str, BeforeValidator(str)] = Field(alias="_id")
-    # path: Optional[str]
-    # description: Optional[str]
-    # tags: Optional[list[str]]
-    # file_type: Optional[str]
+    path: Optional[str]
+    description: Optional[str]
+    tags: Optional[list[str]]
+    file_type: Optional[str]
+    storage: Optional[Literal["local", "drive", "remote"]]
+    mimetype: Optional[str]
+    storage_id: Optional[str]
     size: Optional[str]
     created: Optional[str]
     updated: Optional[str]
@@ -43,8 +46,16 @@ class StorageModel(BaseModel):
     description: Optional[str]
 
 
-class StorageInfoModel(StorageModel):
+class StorageInfoModel(BaseModel):
     id: Annotated[str, BeforeValidator(str)] = Field(alias="_id")
+    name: Optional[str]
+    storage: Optional[Literal["local", "drive", "remote"]]
+    credentials: Optional[dict[str, str]]
+    description: Optional[str]
+
+
+class StoragesInfoModel(BaseModel):
+    storages: list[StorageInfoModel]
 
 
 class UpdateStorageModel(BaseModel):

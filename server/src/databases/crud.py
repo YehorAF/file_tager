@@ -46,4 +46,8 @@ async def insert_storage(data: dict):
 
 
 async def update_storage(storage_id: bson.ObjectId, data: dict):
-    return await db.storages.update_one({"_id": storage_id})
+    return await db.storages.update_one({"_id": storage_id}, {"$set": data})
+
+
+async def delete_storage(storage_id: bson.ObjectId):
+    return await db.storages.delete_one({"_id": storage_id})
